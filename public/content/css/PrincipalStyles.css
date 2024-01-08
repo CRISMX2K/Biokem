@@ -1,0 +1,621 @@
+:root {
+    --header-height: 90px; 
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+body {
+    background-color: #f5f5f5;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/*Header*/
+#miHeader {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: var(--header-height);
+    background-color: #82c372d5 ; 
+    color: #fff; 
+    z-index: 1000; 
+    box-shadow: 0px 6px 8px rgba(0, 0, 0, 0.25);
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+nav{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    justify-content: space-between;
+    width: 90%;
+    padding: 20px 60px;
+}
+
+nav img{
+    justify-self: start;
+    width: 180px;
+}
+
+.HeaderLinks{
+    display: flex;
+    width: 100%;
+    align-self: center;
+    justify-content: center;
+}
+
+.HeaderLinks span{
+    font-weight: 500;
+    padding: 0 20px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: color 0.3s ease-in-out, font-size 0.3s ease-in-out;
+}
+
+.HeaderLinks span:hover{
+    color: rgb(219, 218, 218);
+    font-size: 17px;
+}
+
+/*Contacto*/
+.ContactoContenedorPrincipal{
+    display: grid;
+    font-family: sans-serif;
+    z-index: 10;
+    position: relative;
+    cursor: pointer;
+}
+
+.formularioContactoContenedor{
+    border: 0;
+    border-radius: 20px;
+    padding: 30px 80px;
+    margin: 9% 0 0 0;
+    display: flex;
+    flex-direction: column;
+    font-size: 14px;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.6);
+    width: 50%;
+    justify-self: center;
+    background-color: #f5f5f5;
+    
+}
+
+.formularioContactoContenedor input{
+ margin-bottom: 20px;
+}
+
+.formularioContactoContenedor span{
+    margin-bottom: 5px;
+    font-size: 12px;
+    color: rgb(102, 102, 102);
+    font-weight: 600;
+}
+
+.inputEstiloGeneral{
+    border-radius: 10px;
+    padding: 15px 20px;
+    border: 1px dotted rgb(126, 126, 126);
+    font-size: 12px;
+}
+
+.inputEstiloGeneral::placeholder{
+ color:rgb(170, 170, 170);
+}
+
+.btnEnviarContacto{
+    padding: 12px 25px;
+    color:white;
+    font-weight: 700;
+    border: 0;
+    border-radius: 10px;
+    background-color: #6c975e;
+    cursor: pointer;
+    transition: outline-offset 0.15s ease-in-out;
+    outline: #6c975e solid 2px;
+    outline-offset: -2px;
+}
+.btnEnviarContacto:hover {
+    outline-offset: 3px; 
+}
+
+.logosRedesContacto{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    margin-top: 55px;
+    width: 40%;
+    justify-self: center;
+}
+
+.logoRed{
+    width: 50px;
+    aspect-ratio: 1/1;
+    transition: transform 0.3s ease-in-out;
+    cursor: pointer;
+    justify-self: center;
+    margin-bottom: 5px;
+}
+
+.contenedorRed{
+    display: grid;
+    text-align: center;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.logosRedesContacto img:hover{
+    transform : scale(1.1);
+}
+
+.btnWhatsappContacto{
+    position: absolute;
+    right: 50px;
+    bottom: 100px;
+    border-radius: 50%;
+    filter: drop-shadow( 5px 5px 8px rgba(47, 47, 47));
+    transition: transform 0.3s ease-in-out;
+    cursor: pointer;
+}
+
+.ContenedorNumerosTelefono{
+    justify-self: center;
+    margin-top: 60px;
+    text-align: center;
+    color: #96b18e;
+}
+
+.btnWhatsappContacto:hover{
+    transform : scale(1.2);
+}
+
+
+/*Swal alerts*/
+
+#swal2-title{
+    font-weight: 700;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+#swal2-html-container{
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+
+/*Banner Principal*/
+
+.BannerInicio {
+    margin-top: calc(0% + var(--header-height));
+    padding:  20px 20px 20px 20px;
+}
+
+.banner-container {
+    display: flex;
+    overflow: hidden;
+    height: fit-content;
+    align-items: center;
+    border-radius: 50px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.7);
+}
+
+.banners {
+    display: flex;
+    width: 200%;
+    transition: transform 0.5s ease;
+    align-items: stretch;
+}
+
+.banner {
+    flex: 0 0 100%; 
+    text-align: center;
+    height: fit-content;
+}
+
+.banner img {
+    width: 100%;
+    height: 100%; 
+    border-radius: 50px;
+    object-fit: fill;
+    margin-bottom: -10px;
+}
+
+.prev, .next {
+    cursor: pointer;
+    font-size: 32px;
+    color: white;
+    background-color: #8d8d8d00;
+    border: none;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    -webkit-text-stroke: 1px rgba(92, 92, 92, 0.849);
+}
+
+.prev { margin-right: auto; }
+.next { margin-left: auto; }
+
+.btnBannerIz {
+    position: absolute;
+    left: 20px;
+    z-index: 1;
+}
+
+.btnBannerDer {
+    position: absolute;
+    right: 20px;
+    z-index: 1;
+}
+
+
+/*MINI BANNER*/
+.InfoBanners2{
+    padding: 0 20px 20px 20px;
+    display: flex;
+    flex-direction: row;
+}
+
+.miniBanner{
+    width: 50%;
+    position: relative;
+    display: flex;
+    justify-content: center;
+}
+.banner-containerMini {
+    width: 100%;
+    display: flex;
+    overflow: hidden;
+    height: fit-content;
+    align-items: center;
+    border-radius: 50px;
+    box-shadow: 0 0 9px rgba(0, 0, 0, 0.7);
+    margin: 0 10px 0 0;
+}
+
+.bannersMini {
+    display: flex;
+    width: 100%;
+    transition: transform 0.5s ease;
+
+}
+
+.bannerMini {
+    flex: 0 0 100%; 
+    text-align: center;
+    height: auto; 
+}
+
+.bannerMini img {
+    width: 100%;
+    height: 100%; 
+    border-radius: 50px;
+    object-fit: fill;
+}
+
+.btnBannerIzM {
+    position: absolute;
+    left: 10px;
+    z-index: 1;
+    font-size: 26px;
+}
+
+.btnBannerDerM {
+    position: absolute;
+    right: 10px;
+    z-index: 1;
+    font-size: 26px;
+}
+
+
+/*CARRUSEL SUCURSALES*/
+.CarruselSucursales{
+    width: 50%;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    overflow: hidden;
+}
+#contenedor-carrusel {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    border-radius: 50px;
+}
+
+#flecha-izquierda,
+#flecha-derecha {
+    position: absolute;
+    font-size: 26px;
+}
+
+#flecha-izquierda {
+    position: absolute;
+    left: 20px;
+    z-index: 1;
+}
+
+#flecha-derecha {
+    position: absolute;
+    right: 20px;
+    z-index: 1;
+}
+
+#contenido-carrusel {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+    position: absolute;
+    height: 100%;
+}
+
+.registroCarrusel {
+    flex: 0 0 100%;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.registroCarrusel:first-child {
+    margin-left: 0;
+}
+
+.tarjeta {
+    width: 100%;
+    margin: 0 5px;
+    height: 97%;
+    color: black;
+    border: 0;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.7);
+    border-radius: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    background-image: url(/content/images/MapaCarrusel.png);
+    background-size: cover;
+}
+
+.tarjeta .direccion{
+    cursor: pointer;
+    font-weight: 400;
+}
+
+.tarjeta .nombreSuc{
+    cursor: pointer;
+}
+
+/*Alianzas*/
+.AlianzasBiokem{
+    display: flex;
+    flex-direction: row;
+    padding: 20px;
+    justify-content: center;
+    align-items: center;
+}
+
+.imgAlianzasLogos{
+    display: flex;
+    flex-direction: column;
+    margin: 10px 0 20px 20px;
+}
+
+.imgAlianzasLogos img{
+    margin: 20px 0 20px 40px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.7);
+    border-radius: 30px;
+}
+
+.TituloAl{
+    position: relative;
+    font-size: 24px;
+    font-weight: 700;
+    background-color: #6c975e;
+    color: white;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.7);
+    border-radius: 10px;
+    padding: 10px; 
+    display: inline-block;
+}
+
+.TituloAl::after {
+    content: '';
+    position: absolute;
+    right: -30px; /* ajusta el valor según sea necesario */
+    top:6px;
+    border-width: 20px;
+    border-style: solid;
+    border-color: transparent transparent transparent #6c975e; /* toma el color del fondo del contenedor */
+}
+
+.divisorSecciones{
+    width: 45%;
+    height: 5px;
+    margin: 40px auto 0 auto;
+    border-radius: 20px;
+    background-color: #678d5b;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.7);
+}
+
+
+/*Footer*/
+
+.footerPrincipal{
+    background-color: #6c975e;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    width: 100%;
+    margin-top: 10px;
+    padding: 10px; 
+    box-sizing: border-box;
+    color: white;
+}
+.footerPrincipal div{
+    color: white;
+    padding: 10px 10px;
+    text-align: justify;
+}
+
+.ContactoFooter{
+    font-size: 12px;
+    width: 20%;
+}
+
+.imgLogoFooter {
+    width: 140px;
+}
+
+.FraseFooter{
+    width: 30%;
+    text-align: justify;
+    margin-right: 15px;
+}
+
+.LogoFooterDiv{
+    width:15%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/*Servicios*/
+
+.TituloServicios{
+    padding: 10px 20px;
+    border-radius: 40px;
+    color: white;
+    font-size: 32px;
+    font-weight: 700;
+    background-color: #71a765d5  ;
+    /* box-shadow: 0 0 15px rgba(0, 0, 0, 0.7); */
+    margin: calc(1% + var(--header-height)) auto 20px auto ;
+    text-align: center;
+    width: 90%;
+}
+
+.SeleccionaSucursal{
+    padding: 20px 20px;
+    border-radius: 40px;
+    color: rgb(255, 255, 255);
+    font-size: 22px;
+    font-weight: 400;
+    background-color: #71a765d5;
+    margin: 0px auto 20px;
+    width: 90%;
+    /* box-shadow: 0 0 15px rgba(0, 0, 0, 0.7); */
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.contenedorInputSucursal{
+    display: flex; 
+    flex-direction: column; 
+    width: 25%;
+}
+
+.contenedorInputSucursal select{
+    padding: 10px 20px;
+    border-radius: 5px;
+    border:1px solid lightgray;
+    color: gray;
+    background-color: #f5f5f5;
+    text-align: center;
+}
+
+
+
+.PestañasServicios{
+    padding: 0px 20px;
+    border-radius: 40px;
+    color: white;
+    font-size: 16px;
+    /* background-color: #7d9c75 ; */
+    margin: 0px auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;    
+    width: 70%;
+    /* box-shadow: 0 0 15px rgba(0, 0, 0, 0.7); */
+    transition: all 0.5s ease-in-out;
+    opacity: 0.5;
+}
+
+.PestañasServicios p{
+    padding: 10px 20px;
+    border-radius: 40px;
+    margin: 10px 0;
+    cursor:pointer;
+    transition: all 0.3s ease-in-out;
+    background-color: #8eb381 ; 
+    /* box-shadow: 0 0 15px rgba(0, 0, 0, 0.7);  */
+    width: 100px;
+    text-align: center;
+}
+
+.PestañasServicios p:hover{
+    color: rgb(97, 97, 97);
+}
+
+.OpcionPestañaSeleccionada{
+    font-weight: 700;
+    color: #7d9c75 ;
+    border-radius: 20px;
+    text-shadow: 
+        -1px -1px 0 #ffffff56,  
+         1px -1px 0 #ffffff56,
+        -1px  1px 0 #ffffff56,
+         1px  1px 0 #ffffff56;
+
+    border:1px solid rgb(175, 175, 175);
+    text-decoration: underline;
+}
+
+.ContenedorInformacionServicios{
+    opacity: 0.7;
+    padding: 0px 20px;
+    border-radius: 40px;
+    color: black;
+    font-size: 16px;
+    background-color: white ;
+    margin: 20px auto;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.7);
+    width: 80%;
+    height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.RegistroAnalisis{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.7);
+    margin: 10px;
+    border-radius: 20px;
+    width: 200px;
+    height: 50px;
+    flex: 0 0 calc(22%); 
+    max-width: calc(22%);
+}
+
+
+.FadeInDerecha {
+    opacity: 0;
+    transform: translateX(100%);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+    animation: fadeInRight 1s forwards;
+}
+
+
+@keyframes fadeInRight {
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}

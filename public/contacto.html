@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/content/css/PrincipalStyles.css">
+    <link rel="icon" type="image/png" sizes="16x16"  href="/content/images/favicon.png">
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <title>BIOKEM</title>
+</head>
+
+<body>
+    <script>
+        // Crear elemento div para contener el header
+        var headerContainer = document.createElement("div");
+        // Usa Fetch API para cargar el contenido del header.html
+        fetch("header.html")
+            .then(response => response.text())
+            .then(data => {
+                // Asignar el HTML del encabezado al contenido del contenedor
+                headerContainer.innerHTML = data;
+                // Agregar el contenedor del encabezado al cuerpo del documento
+                document.body.prepend(headerContainer);
+            });
+
+            //Captcha
+    </script>
+
+    <section class="ContactoContenedorPrincipal">
+        <div class="formularioContactoContenedor">
+            <p style="font-weight: 700; font-size: 28px; text-align: center; margin:5px 0 20px 0; color: #6c975e ;">Contacto</p>
+            <span style="margin-bottom: 15px; font-size: 18px; font-weight: 200;">Para información sobre nuestros servicios o solicitud de cotización escríbanos.</span>
+
+            <span>Nombre Completo</span>
+            <input type="text" id="NombreContacto" class="inputEstiloGeneral" placeholder="Ingresa tu nombre completo">
+            <span>E-mail</span>
+            <input type="text" id="EmailContacto" class="inputEstiloGeneral" placeholder="Ingresa tu email">
+            <span>Mensaje</span>
+            <input type="text" id="MensajeContacto" class="inputEstiloGeneral" placeholder="Ingresa tu mensaje">
+            <button class="btnEnviarContacto" id="enviarCorreoContacto">Enviar</button>
+        </div>
+        
+        <div class="logosRedesContacto">
+            <div class="contenedorRed" style="color: rgb(5, 76, 170);">
+                <img src="/content/images/logos-Redes/facebook.PNG" alt="" class="logoRed">
+                @BIOKEM
+            </div>
+            <div class="contenedorRed" style="color: rgb(108, 79, 177);">
+                <img src="/content/images/logos-Redes/instagram.png" alt="" class="logoRed">
+                @BIOKEM
+            </div>
+            <div class="contenedorRed" style="color: rgb(0, 97, 153);">
+                <img src="/content/images/logos-Redes/linkedin.png" alt="" class="logoRed">
+                @BIOKEM
+            </div>
+        </div>
+        <div class="ContenedorNumerosTelefono">
+            <span style="font-size: 20px; font-weight: 700;">Tambien puedes llamarnos al</span> <br><br>Teléfono <span style="font-weight: 600;">33 3641 1942</span> / Celular <span style="font-weight: 600;">33 1975 1623</span>
+        </div>
+    </section>
+    <img src="content/images/contacto-mujer.png" alt="" style="border-top-right-radius: 100px; position: absolute; bottom: 0; left: 0; width: 20%; z-index: -10;">
+
+    <div class="btnWhatsappContacto">
+        <img src="content/images/logos-Redes/whatsapp.png" style="width: 60px;">
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // Crear elemento div para contener el footer
+            var footerContainer = document.createElement("div");
+            // Usa Fetch API para cargar el contenido del footer.html
+            fetch("footer.html")
+                .then(response => response.text())
+                .then(data => {
+                    // Asignar el HTML del footer al contenido del contenedor
+                    footerContainer.innerHTML = data;
+                    // Agregar el contenedor del footer al final del cuerpo del documento
+                    document.body.appendChild(footerContainer);
+                });
+        });
+    </script>
+    <script src="/scripts/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/content/css/PrincipalStyles.css">
+    <link rel="icon" type="image/png" sizes="16x16"  href="/content/images/favicon.png">
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <title>BIOKEM</title>
+</head>
+
+<body>
+    
+    <script>
+        // Crear elemento div para contener el header
+        var headerContainer = document.createElement("div");
+        // Usa Fetch API para cargar el contenido del header.html
+        fetch("header.html")
+            .then(response => response.text())
+            .then(data => {
+                // Asignar el HTML del encabezado al contenido del contenedor
+                headerContainer.innerHTML = data;
+                // Agregar el contenedor del encabezado al cuerpo del documento
+                document.body.prepend(headerContainer);
+            });
+    </script>
+
+    <p class="TituloServicios">Servicios</p>
+    <div class="SeleccionaSucursal">
+        <span style="font-size: 18px; width:50%; text-align: justify;">
+            Contamos con áreas de trabajo especializadas en hematología, coagulación, química clínica, inmunología / serología y bacteriología, uroanálisis, coprología,
+            pruebas especiales y servicio de referencia, con una plataforma de equipamiento de tecnología de punta para el procesamiento de muestras.
+        </span> <br>
+        <div class="contenedorInputSucursal">
+            <span style="font-size: 14px; font-weight: 600; margin-bottom: 5px;">Selecciona una sucursal:</span>
+            <select name="" id="SucursalServicios">
+                <option value="" selected>Selecciona una opción</option>
+            </select>
+        </div>
+        
+    </div>
+    <div class="PestañasServicios">
+        <p id="Analisis">Analisis</p>
+        <p id="Chequeos">Chequeos</p>
+        <p id="Perfiles">Perfiles</p>
+        <p id="Imagen">Imagenología</p>
+    </div>
+
+    <div class="ContenedorInformacionServicios">
+        <p>Seleccione un tipo de servicio para visualizar las opciones</p>
+    </div>
+    
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // Crear elemento div para contener el footer
+            var footerContainer = document.createElement("div");
+            // Usa Fetch API para cargar el contenido del footer.html
+            fetch("footer.html")
+                .then(response => response.text())
+                .then(data => {
+                    // Asignar el HTML del footer al contenido del contenedor
+                    footerContainer.innerHTML = data;
+                    // Agregar el contenedor del footer al final del cuerpo del documento
+                    document.body.appendChild(footerContainer);
+                });
+        });
+    </script>
+    <script src="/scripts/main.js"></script>
+</body>
+</html>

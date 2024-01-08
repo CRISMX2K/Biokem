@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/content/css/PrincipalStyles.css">
+    <link rel="icon" type="image/png" sizes="16x16"  href="/content/images/favicon.png">
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <title>BIOKEM</title>
+</head>
+
+<body>
+    
+    <script>
+        // Crear elemento div para contener el header
+        var headerContainer = document.createElement("div");
+        // Usa Fetch API para cargar el contenido del header.html
+        fetch("header.html")
+            .then(response => response.text())
+            .then(data => {
+                // Asignar el HTML del encabezado al contenido del contenedor
+                headerContainer.innerHTML = data;
+                // Agregar el contenedor del encabezado al cuerpo del documento
+                document.body.prepend(headerContainer);
+            });
+    </script>
+    <article class="BannerInicio" id="BannerInicio">
+        <div class="banner-container">
+            <button class="prev btnBannerIz" onclick="cambiarBanner(-1)">❮</button>
+            <div class="banners" id="banners-container"></div>
+            <button class="next btnBannerDer" onclick="cambiarBanner(1)">❯</button>
+        </div>
+    </article>
+
+    <section class="InfoBanners2">
+        <article class="miniBanner">
+            <div class="banner-containerMini">
+                <button class="prev btnBannerIzM" onclick="cambiarMiniBanner(-1)">❮</button>
+                <div class="bannersMini" id="Minibanners-container"></div>
+                <button class="next btnBannerDerM" onclick="cambiarMiniBanner(1)">❯</button>
+            </div>
+        </article>
+
+        <article class="CarruselSucursales">
+            <div id="contenedor-carrusel">
+                <div id="flecha-izquierda" class="prev">❮</div>
+                <div id="contenido-carrusel">
+                    
+                </div>
+                <div id="flecha-derecha" class="next">❯</div>
+            </div>
+        </article>
+    </section>
+    
+    <div class="divisorSecciones"></div>
+
+    <section class="AlianzasBiokem">
+        <div class="TituloAlianzas">
+            <p class="TituloAl">Alianzas Estratégicas</p>
+        </div>
+
+        <div class="imgAlianzasLogos">
+            <img src="/content/images/logosAlianzas/BKanimalHealt.png" alt="" style="padding: 0px 0px 0px 5px;">
+            <img src="/content/images/logosAlianzas/Col2.png" alt="" style="padding: 15px 0 15px 5px;">
+        </div>
+    </section>
+
+    
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // Crear elemento div para contener el footer
+            var footerContainer = document.createElement("div");
+            // Usa Fetch API para cargar el contenido del footer.html
+            fetch("footer.html")
+                .then(response => response.text())
+                .then(data => {
+                    // Asignar el HTML del footer al contenido del contenedor
+                    footerContainer.innerHTML = data;
+                    // Agregar el contenedor del footer al final del cuerpo del documento
+                    document.body.appendChild(footerContainer);
+                });
+        });
+    </script>
+    <script src="/scripts/main.js"></script>
+</body>
+</html>
