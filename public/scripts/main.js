@@ -85,7 +85,7 @@ if(document.getElementById("BannerInicio")){
     async function obtenerBanners() {
         try {
             let responseBanners = await $.ajax({
-                url: "https://apibk.poluxdev.com/v1/images/active/BannersPrincipal",
+                url: "https://apibk.poluxdev.com/v1/images/active/BP",
                 type: "GET",
                 headers:  {
                     "Authorization": `Bearer ${tkFront}`
@@ -99,8 +99,7 @@ if(document.getElementById("BannerInicio")){
                 banner.className = "banner";
 
                 const imagen = document.createElement("img");
-                //imagen.src = "https://apibk.poluxdev.com/" + bannerData.path;
-                imagen.src = "http://biokempage.test:85/content/BANER1.png"
+                imagen.src = "https://apibk.poluxdev.com/" + bannerData.path;
                 banner.appendChild(imagen);
 
                 container.appendChild(banner);
@@ -164,7 +163,7 @@ if(document.getElementById("BannerInicio")){
     async function obtenerMiniBanners() {
         try {
             let responseBanners = await $.ajax({
-                url: "https://apibk.poluxdev.com/v1/images/active/MiniBannerPrinicipal",
+                url: "https://apibk.poluxdev.com/v1/images/active/BP",
                 type: "GET",
                 headers:  {
                     "Authorization": `Bearer ${tkFront}`
@@ -178,8 +177,7 @@ if(document.getElementById("BannerInicio")){
                 banner.className = "bannerMini";
 
                 const imagen = document.createElement("img");
-                //imagen.src = "https://apibk.poluxdev.com/" + bannerData.path;
-                imagen.src = "http://biokempage.test:85/content/images/MINI.png"
+                imagen.src = "https://apibk.poluxdev.com/" + bannerData.path;
                 banner.appendChild(imagen);
 
                 container.appendChild(banner);

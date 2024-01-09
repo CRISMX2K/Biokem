@@ -280,7 +280,7 @@ nav img{
 .bannerMini {
     flex: 0 0 100%; 
     text-align: center;
-    height: auto; 
+    height: 200px; 
 }
 
 .bannerMini img {
