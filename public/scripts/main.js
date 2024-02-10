@@ -154,10 +154,6 @@ if(document.getElementById("BannerInicio")){
     obtenerBanners();
 
 
-
-
-
-
 //MINI BANNER
     // Ejecutamos la función ajax para traer las imágenes de banner activas e insertar los banners
     async function obtenerMiniBanners() {
@@ -395,23 +391,78 @@ if(window.location.pathname.includes("catalogo")){
                     });
                     
                     let Analisis = respuestaAnalisis.data;
-                    
-                    ContenedorRegistros.innerHTML  = "";
-                    ContenedorRegistros.style.alignItems  = "start";
-                    ContenedorRegistros.style.justifyContent  = "start";
-                    Analisis.forEach(analisis =>{
-                        let TarjetaRegistro = `
-                            <div class="RegistroAnalisis FadeInDerecha">
-                                <img src="/content/images/Iconos/analisis.png" style="width:35px;">
-                                <div style="display:flex; flex-direction:column; font-size:12px; padding:0 10px;">
-                                    <span style="font-weight:800;">${analisis.studio}</span>
-                                    <span>$${analisis.price} MXN</span>
+                    if(Analisis !== null){
+                        ContenedorRegistros.innerHTML  = "";
+                        ContenedorRegistros.style.alignItems  = "start";
+                        ContenedorRegistros.style.justifyContent  = "start";
+                        Analisis.forEach(analisis =>{
+                            let TarjetaRegistro = `
+                                <div class="RegistroAnalisis FadeInDerecha">
+                                    <img src="/content/images/Iconos/analisis.png" style="width:35px;">
+                                    <div style="display:flex; flex-direction:column; font-size:12px; padding:0 10px;">
+                                        <span style="font-weight:800;">${analisis.studio}</span>
+                                        <span>$${analisis.price} MXN</span>
+                                    </div>
                                 </div>
-                            </div>
-                        `;
+                            `;
+    
+                            ContenedorRegistros.innerHTML += TarjetaRegistro;
+                        });
 
-                        ContenedorRegistros.innerHTML += TarjetaRegistro;
+                    }else{
+                        ContenedorRegistros.style.alignItems  = "center";
+                        ContenedorRegistros.style.justifyContent  = "center";
+                        ContenedorRegistros.innerHTML  = "No hay analisis en esta sucursal";
+                    }
+                    
+
+                }catch(e){
+                    console.error(e);
+                    respuestaAnalisis = "Error: " + e.error;
+                }
+            }
+
+            PerfilesTexto.onclick = async function(){
+                PerfilesTexto.classList.add("OpcionPestañaSeleccionada");
+                ChequeosTexto.classList.remove("OpcionPestañaSeleccionada");
+                AnalisisTexto.classList.remove("OpcionPestañaSeleccionada");
+                ImagenTexto.classList.remove("OpcionPestañaSeleccionada");
+
+                try{
+                    let = respuestaPerfiles = await $.ajax({
+                        url: "https://apibk.poluxdev.com/v1/catalogs/profilesByOffice/" + SucursalID,
+                        type: "GET",
+                        headers:  {
+                            "Authorization": `Bearer ${tkFront}`
+                        }
                     });
+                    
+                    let Perfiles = respuestaPerfiles.data;
+
+                    if(Perfiles !== null){
+                        ContenedorRegistros.innerHTML  = "";
+                        ContenedorRegistros.style.alignItems  = "start";
+                        ContenedorRegistros.style.justifyContent  = "start";
+                        Perfiles.forEach(perfil =>{
+                            let TarjetaRegistro = `
+                                <div class="RegistroAnalisis FadeInDerecha">
+                                    <img src="/content/images/Iconos/analisis.png" style="width:35px;">
+                                    <div style="display:flex; flex-direction:column; font-size:12px; padding:0 10px;">
+                                        <span style="font-weight:800;">${perfil.profile}</span>
+                                        <span>$${perfil.price} MXN</span>
+                                    </div>
+                                </div>
+                            `;
+    
+                            ContenedorRegistros.innerHTML += TarjetaRegistro;
+                        });
+
+                    }else{
+                        ContenedorRegistros.style.alignItems  = "center";
+                        ContenedorRegistros.style.justifyContent  = "center";
+                        ContenedorRegistros.innerHTML  = "No hay perfiles en esta sucursal";
+                    }
+                    
 
                 }catch(e){
                     console.error(e);
