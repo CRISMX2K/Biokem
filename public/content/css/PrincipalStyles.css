@@ -623,6 +623,23 @@ nav img{
     }
 }
 
+@keyframes fadeInRights {
+    from {
+      opacity: 0;
+      transform: translateX(-50px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+  
+  .fadeInRight {
+    animation-name: fadeInRights;
+    animation-duration: 1s;
+    animation-timing-function: ease-in-out;
+  }
+
 /* Fade in hacia arriba */
 @keyframes fadeInUp {
     from {
