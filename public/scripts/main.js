@@ -473,6 +473,46 @@ if(window.location.pathname.includes("catalogo")){
     }
 }
 
+if(window.location.pathname.includes("registro")){
+    const FormularioRegistro = document.getElementById("RegistroForm");
+
+    FormularioRegistro.onsubmit = async function(event){
+        event.preventDefault();
+        if(document.getElementById("contra2Reg").value === document.getElementById("contraReg").value){
+            try{
+                let = respuestaRegistro = await $.ajax({
+                    url: "https://apibk.poluxdev.com/v1/secure/register/",
+                    type: "GET",
+                    headers:  {
+                        "Authorization": `Bearer ${tkFront}`
+                    },
+                    data: {
+                        curp: document.getElementById("CurpReg").value,
+                        email: document.getElementById("correoReg").value,
+                        firstname: document.getElementById("NombreReg").value,
+                        lastname: document.getElementById("ApellidoPReg").value,
+                        secondlastname: document.getElementById("ApellidoMReg").value,
+                        password: document.getElementById("contra2Reg").value
+                    }
+                });
+    
+                console.log(respuestaRegistro);
+            }catch(e){
+    
+            }
+
+        }else{
+            event.preventDefault();
+            Swal.fire({
+                title:"¡Las contraseñas no coinciden!",
+                text: "Vuelve a ingresar tu contraseña y su confirmación porfavor.",
+                icon: "warning"
+            });
+        }
+        
+    }
+}
+
 function convertirAMayusculas(input) {
     input.addEventListener('input', function(event) {
       input.value = event.target.value.toUpperCase();

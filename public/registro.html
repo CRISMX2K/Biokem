@@ -46,7 +46,7 @@
                 <span>Contraseña:</span>
                 <input type="password" id="contraReg" class="inputEstiloGeneral" placeholder="Ingresa tu Contraseña" style="margin:5px 0 10px 0;" required>
                 <span>Confirma tu contraseña:</span>
-                <input type="password" id="contra2Reg" class="inputEstiloGeneral" placeholder="Ingresa tu Contraseña" style="margin:5px 0 10px 0;" required>
+                <input type="password" id="contra2Reg" class="inputEstiloGeneral" placeholder="Ingresa tu Contraseña" style="margin:5px 0 10px 0;" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="La contraseña debe contener al menos 8 caracteres, incluyendo al menos una letra mayúscula, una letra minúscula y un número.">
 
                 <button class="btnIniciarSesion" type="submit">Registrarse</button>
             </form>
