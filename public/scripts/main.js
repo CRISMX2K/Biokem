@@ -471,5 +471,10 @@ if(window.location.pathname.includes("catalogo")){
             }
         }
     }
-
 }
+
+function convertirAMayusculas(input) {
+    input.addEventListener('input', function(event) {
+      input.value = event.target.value.toUpperCase();
+    });
+  }

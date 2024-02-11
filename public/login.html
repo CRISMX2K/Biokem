@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/content/css/PrincipalStyles.css">
+    <link rel="icon" type="image/png" sizes="16x16"  href="/content/images/favicon.png">
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <title>BIOKEM</title>
+</head>
+
+<body style="display: grid;">
+    <script>
+        // Crear elemento div para contener el header
+        var headerContainer = document.createElement("div");
+        headerContainer.style.display = "contents";
+        // Usa Fetch API para cargar el contenido del header.html
+        fetch("header.html")
+            .then(response => response.text())
+            .then(data => {
+                // Asignar el HTML del encabezado al contenido del contenedor
+                headerContainer.innerHTML = data;
+                // Agregar el contenedor del encabezado al cuerpo del documento
+                document.body.prepend(headerContainer);
+            });
+
+            //Captcha
+    </script>
+
+    <section class="ContenedorPrincipalLogIn">
+        <img src="/content/images/HombreRegistro.png" alt="" class="imgLogin">
+        <div class="ContenedorLogInputs">
+            <p style="font-size: 22px; font-weight: 700;">Iniciar sesión</p>
+            <form action="" id="LoginForm" style="display: flex; flex-direction: column;">
+                <span>Correo:</span>
+                <input type="email" id="correoLog" class="inputEstiloGeneral" placeholder="Ingresa tu correo" style="margin:5px 0 10px 0;" required>
+                <span>Contraseña:</span>
+                <input type="password" id="contraLog" class="inputEstiloGeneral" placeholder="Ingresa tu Contraseña" style="margin:5px 0 0px 0;" required>
+                <span class="fraseOlvideContra">¿Olvidaste tu contraseña?</span>
+
+                <button class="btnIniciarSesion" type="submit">Iniciar</button>
+            </form>
+
+            <span style="margin-top: 5px;">¿No tienes una cuenta? <span class="fraseOlvideContra" onclick="window.location.href = window.origin + '/registro.html'">Crea una aquí</span></span>
+        </div>
+    </section>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // Crear elemento div para contener el footer
+            var footerContainer = document.createElement("div");
+            // Usa Fetch API para cargar el contenido del footer.html
+            fetch("footer.html")
+                .then(response => response.text())
+                .then(data => {
+                    // Asignar el HTML del footer al contenido del contenedor
+                    footerContainer.innerHTML = data;
+                    footerContainer.style.position = "absolute";
+                    footerContainer.style.bottom = "0";
+                    // Agregar el contenedor del footer al final del cuerpo del documento
+                    document.body.appendChild(footerContainer);
+                });
+        });
+    </script>
+    <script src="/scripts/main.js"></script>
+</body>
+</html>

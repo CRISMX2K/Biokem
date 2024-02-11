@@ -622,3 +622,155 @@ nav img{
         transform: translateX(0);
     }
 }
+
+/* Fade in hacia arriba */
+@keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(50px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  .fadeInUp {
+    animation-name: fadeInUp;
+    animation-duration: 1s;
+    animation-timing-function: ease-in-out;
+  }
+  
+  /* Fade in hacia abajo */
+  @keyframes fadeInDown {
+    from {
+      opacity: 0;
+      transform: translateY(-50px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  .fadeInDown {
+    animation-name: fadeInDown;
+    animation-duration: 1s;
+    animation-timing-function: ease-in-out;
+  }
+
+  /* Fade in hacia la izquierda */
+  @keyframes fadeInLeft {
+    from {
+      opacity: 0;
+      transform: translateX(50px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+  
+  .fadeInLeft {
+    animation-name: fadeInLeft;
+    animation-duration: 1s;
+    animation-timing-function: ease-in-out;
+  }
+
+
+/*LOG IN*/
+.ContenedorLogInputs{
+    display: flex;
+    flex-direction: column;
+}
+
+.ContenedorLogInputs span{
+    font-size: 14px;
+}
+
+.ContenedorPrincipalLogIn{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.7);
+    width: fit-content;
+    padding: 5px 25px 25px 0;
+    border-radius: 40px;
+    height: fit-content;
+    justify-self: center;
+    margin: calc(6% + var(--header-height)) auto 20px auto ;
+}
+
+.imgLogin{
+    height: 300px;
+    transform: scaleX(-1);
+    justify-self: start;
+}
+
+.btnIniciarSesion{
+    padding: 12px 25px;
+    color: white;
+    font-weight: 700;
+    border: 0;
+    border-radius: 10px;
+    background-color: #6c975e;
+    cursor: pointer;
+    transition: outline-offset 0.15s ease-in-out;
+    outline: #6c975e solid 2px;
+    outline-offset: -2px;
+}
+
+.btnIniciarSesion:hover {
+    outline-offset: 3px; 
+}
+
+
+.fraseOlvideContra{
+    margin: 0 0 20px 0;
+    font-size: 12px !important;
+    text-decoration: underline;
+    color:#6c975e; 
+    cursor: pointer;
+}
+
+/*REGISTRO*/
+.ContenedorPrincipalReg{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: 1fr;
+    gap: 20px;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.7);
+    width: fit-content;
+    padding: 5px 0px 25px 25px;
+    border-radius: 40px;
+    height: fit-content;
+    justify-self: center;
+    margin: calc(4% + var(--header-height)) auto calc(0% + var(--header-height)) auto ;
+}
+
+.imgReg{
+    height: 400px;
+    align-self: center;
+    margin-left: 20px;
+    mask-image: linear-gradient(to top, transparent, black 10%, black 85%, transparent);
+}
+
+.ContenedorRegInputs{
+    display: flex;
+    flex-direction: column;
+}
+
+
+.ContenedorRegInputs span{
+    font-size: 14px;
+}
+
+.ContenedorPrincipalReg .ContenedorRegInputs {
+    grid-column: 1; 
+    grid-row: 1;
+}
+
+.ContenedorPrincipalReg .imgReg {
+    grid-column: 2;
+    grid-row: 1;
+}
