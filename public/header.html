@@ -1,4 +1,4 @@
-<header id="miHeader">
+<header id="miHeader" class="fadeInDown">
     <nav>
         <img src="/content/images/logoPrincipal.png" alt="BIOKEM" onclick="window.location.href = '/'">
 
@@ -7,7 +7,8 @@
             <span>Quienes somos</span>
             <span onclick="window.location.href = 'catalogo.html'">Servicios</span>
             <span onclick="window.location.href = 'contacto.html'">Contactanos</span>
-            <span onclick="window.location.href = 'login.html'">Inicia sesión / regístrate</span>
+            <span onclick="window.location.href = 'login.html'" id="SinSession">Inicia sesión / regístrate</span>
+            <span onclick="cerrarSesion()" id="ConSession" style="display: none;">Cerrar sesión</span>
         </div>
     </nav>
 </header>

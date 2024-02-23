@@ -22,6 +22,19 @@
                 headerContainer.innerHTML = data;
                 // Agregar el contenedor del encabezado al cuerpo del documento
                 document.body.prepend(headerContainer);
+                //Header dinamico
+                const headerConSesion = document.getElementById("ConSession");
+                const headerSinSesion = document.getElementById("SinSession");
+
+                if (headerConSesion || headerSinSesion) {
+                    if (document.cookie.split(';').some(cookie => cookie.trim().startsWith("session=Active"))) {
+                        headerConSesion.style.display = "block";
+                        headerSinSesion.style.display = "none";
+                    } else {
+                        headerConSesion.style.display = "none";
+                        headerSinSesion.style.display = "block";
+                    }
+                }
             });
 
             //Captcha

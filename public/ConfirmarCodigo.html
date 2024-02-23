@@ -10,11 +10,11 @@
     <title>BIOKEM</title>
 </head>
 
-<body>
-    
+<body style="display: grid;">
     <script>
         // Crear elemento div para contener el header
         var headerContainer = document.createElement("div");
+        headerContainer.style.display = "contents";
         // Usa Fetch API para cargar el contenido del header.html
         fetch("header.html")
             .then(response => response.text())
@@ -37,49 +37,19 @@
                     }
                 }
             });
+
+            //Captcha
     </script>
-    <article class="BannerInicio fadeInDown" id="BannerInicio">
-        <div class="banner-container">
-            <button class="prev btnBannerIz" onclick="cambiarBanner(-1)">❮</button>
-            <div class="banners" id="banners-container"></div>
-            <button class="next btnBannerDer" onclick="cambiarBanner(1)">❯</button>
-        </div>
-    </article>
 
-    <section class="InfoBanners2">
-        <article class="miniBanner fadeInRight">
-            <div class="banner-containerMini">
-                <button class="prev btnBannerIzM" onclick="cambiarMiniBanner(-1)">❮</button>
-                <div class="bannersMini" id="Minibanners-container"></div>
-                <button class="next btnBannerDerM" onclick="cambiarMiniBanner(1)">❯</button>
-            </div>
-        </article>
-
-        <article class="CarruselSucursales fadeInLeft">
-            <div id="contenedor-carrusel">
-                <div id="flecha-izquierda" class="prev">❮</div>
-                <div id="contenido-carrusel">
-                    
-                </div>
-                <div id="flecha-derecha" class="next">❯</div>
-            </div>
-        </article>
-    </section>
-    
-    <div class="divisorSecciones fadeInUp"></div>
-
-    <section class="AlianzasBiokem fadeInUp">
-        <div class="TituloAlianzas">
-            <p class="TituloAl">Alianzas Estratégicas</p>
-        </div>
-
-        <div class="imgAlianzasLogos">
-            <img src="/content/images/logosAlianzas/BKanimalHealt.png" alt="" style="padding: 0px 0px 0px 5px;">
-            <img src="/content/images/logosAlianzas/Col2.png" alt="" style="padding: 15px 0 15px 5px;">
+    <section class="ContenedorCodigo">
+        <p style="font-weight: 600; font-size: 20px;margin-top: 0;">Ingresa el código enviado a tu correo electrónico</p>
+        <input oninput="soloNumeros(this)" type="text" maxlength="4" oninput="" class="inputEstiloGeneral" placeholder="Ingresa tu código" id="CodigoSeguridad">
+        <button class="btnVerdeBK" id="ConfirmarCD">Confirmar</button> <br>
+        <div style="display: flex; align-items: center;padding: 5px 0 5px 0;">
+            <input type="checkbox" id="Recordar"> <span style="font-size: 12px; margin-bottom: 2px;">Recordar mi cuenta</span>
         </div>
     </section>
 
-    
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             // Crear elemento div para contener el footer
@@ -90,6 +60,8 @@
                 .then(data => {
                     // Asignar el HTML del footer al contenido del contenedor
                     footerContainer.innerHTML = data;
+                    footerContainer.style.position = "absolute";
+                    footerContainer.style.bottom = "0";
                     // Agregar el contenedor del footer al final del cuerpo del documento
                     document.body.appendChild(footerContainer);
                 });

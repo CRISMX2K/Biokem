@@ -481,8 +481,8 @@ if(window.location.pathname.includes("registro")){
         if(document.getElementById("contra2Reg").value === document.getElementById("contraReg").value){
             try{
                 let = respuestaRegistro = await $.ajax({
-                    url: "https://apibk.poluxdev.com/v1/secure/register/",
-                    type: "GET",
+                    url: "https://apibk.poluxdev.com/v1/secure/register",
+                    type: "POST",
                     headers:  {
                         "Authorization": `Bearer ${tkFront}`
                     },
@@ -496,9 +496,59 @@ if(window.location.pathname.includes("registro")){
                     }
                 });
     
-                console.log(respuestaRegistro);
+                let respuesta = JSON.parse(respuestaRegistro);
+                if(respuesta.status){
+                    sessionStorage.setItem("PS", document.getElementById("contra2Reg").value);
+                    sessionStorage.setItem("CE", document.getElementById("correoReg").value);
+                    try{
+                        let = respuestaDosFactor = await $.ajax({
+                            url: "https://apibk.poluxdev.com/v1/secure/2FA",
+                            type: "POST",
+                            headers:  {
+                                "Authorization": `Bearer ${tkFront}`
+                            },
+                            data: {
+                                email: document.getElementById("correoReg").value
+                            }
+                        });
+
+                        let respuesta2F = JSON.parse(respuestaDosFactor);
+                        if(respuesta2F.status){
+                            Swal.fire({
+                                title: "¡Registrado correctamente!",
+                                text: "Hemos enviado un código de confirmación a tu correo electrónico. Presiona 'Ok' para ir al siguiente paso.",
+                                icon: "success",
+                                buttons: {
+                                    continuar: {
+                                        text: "Continuar",
+                                        value: true,
+                                        visible: true,
+                                        className: "btn-continuar",
+                                        closeModal: true
+                                    }
+                                }
+                            }).then((val)=>{
+                                if(val){
+                                    sessionStorage.setItem("CoVe", "true");
+                                    window.location.href = "ConfirmarCodigo.html";
+                                }
+                            });
+                        }
+
+                    }catch(error){
+                        console.error(error);
+                    }
+
+                }else{
+                    
+                    Swal.fire({
+                        title: "¡No se ha completado el registro!",
+                        text: respuesta.message,
+                        icon: "warning"
+                    });
+                }
             }catch(e){
-    
+                console.error(e.message);
             }
 
         }else{
@@ -513,8 +563,228 @@ if(window.location.pathname.includes("registro")){
     }
 }
 
+if(window.location.pathname.includes("ConfirmarCodigo")){
+    let codigoEnviado = sessionStorage.getItem("CoVe");
+
+    if(codigoEnviado === "true"){
+        
+        const btnConfirmar = document.getElementById("ConfirmarCD");
+        btnConfirmar.onclick = async function(){
+
+            const codigoSeguridad = document.getElementById("CodigoSeguridad").value.trim();
+            if (codigoSeguridad === "") {
+                Swal.fire({
+                    title: "¡Código vacío!",
+                    text: "Ingresa tu código para continuar.",
+                    icon: "warning"
+                });
+                return; 
+            }
+
+            try{
+                let = respuestaDosFactor = await $.ajax({
+                    url: "https://apibk.poluxdev.com/v1/secure/2FAAuth",
+                    type: "POST",
+                    headers:  {
+                        "Authorization": `Bearer ${tkFront}`
+                    },
+                    data: {
+                        code: codigoSeguridad
+                    }
+                });
+
+                let response = JSON.parse(respuestaDosFactor);
+                
+                if(response.status){
+                    Swal.fire({
+                        title: "¡Código correcto!",
+                        text: "Se ha validado el código. Presiona 'Ok' para continuar.",
+                        icon: "success",
+                        buttons: {
+                            continuar: {
+                                text: "Continuar",
+                                value: true,
+                                visible: true,
+                                className: "btn-continuar",
+                                closeModal: true
+                            }
+                        }
+                    }).then(async (val)=>{
+                        if(val){
+                            sessionStorage.removeItem("CoVe");
+                            const recordar = document.getElementById("Recordar");
+                            if(recordar.checked){
+                                localStorage.setItem("TKLI", response.data.token);
+                            }
+
+                            try{
+                                let = respuestaLog = await $.ajax({
+                                    url: "https://apibk.poluxdev.com/v1/secure/login",
+                                    type: "POST",
+                                    headers:  {
+                                        "Authorization": `Bearer ${tkFront}`
+                                    },
+                                    data: {
+                                        user: sessionStorage.getItem("CE"),
+                                        password: sessionStorage.getItem("PS")
+                                    }
+                                });
+
+                                let responseLog = JSON.parse(respuestaLog);
+                                console.log(responseLog)
+                                if(responseLog.status){
+                                    const unDiaEnMilisegundos = 24 * 60 * 60 * 1000; 
+                                    const fechaExpiracion = new Date(Date.now() + unDiaEnMilisegundos);
+                                    const fechaExpiracionUTC = fechaExpiracion.toUTCString();
+                                    document.cookie = `session=Active; expires=${fechaExpiracionUTC}; path=/`;
+                                    sessionStorage.removeItem("CE");
+                                    sessionStorage.removeItem("PS");
+                                    window.location.href = "/";
+                                }else{
+                                    console.error("Ocurrió un error");
+                                }
+                            }catch(error){
+                                console.error(error.message);
+                            }
+                        }
+                    });
+                }else{
+                    Swal.fire({
+                        title:"¡El código no coincide!",
+                        text: "Confirma tu código y vuelve a intentar.",
+                        icon: "warning"
+                    });
+                }
+            }catch(error){
+                console.error(error.message);
+            }
+        }
+    }else{
+        window.location.href = "registro.html";
+    }
+}
+
+if(window.location.pathname.includes("login")){
+
+    const formularioLog = document.getElementById("LoginForm");
+    const correo = document.getElementById("correoLog");
+    const pass = document.getElementById("contraLog");
+
+    formularioLog.addEventListener("submit", async function(event){
+        event.preventDefault();
+        if(localStorage.getItem("TKLI") !== null && localStorage.getItem("TKLI") !== "" && localStorage.getItem("TKLI") !== undefined){
+            try{
+                let = respuestaLog = await $.ajax({
+                    url: "https://apibk.poluxdev.com/v1/secure/login",
+                    type: "POST",
+                    headers:  {
+                        "Authorization": `Bearer ${tkFront}`
+                    },
+                    data: {
+                        user: correo.value,
+                        password: pass.value
+                    }
+                });
+
+                let responseLog = JSON.parse(respuestaLog);
+                
+                if(responseLog.status){
+                    const unDiaEnMilisegundos = 24 * 60 * 60 * 1000; 
+                    const fechaExpiracion = new Date(Date.now() + unDiaEnMilisegundos);
+                    const fechaExpiracionUTC = fechaExpiracion.toUTCString();
+                    document.cookie = `session=Active; expires=${fechaExpiracionUTC}; path=/`;
+                    window.location.href = "/";
+                }else{
+                    console.error("Ocurrió un error");
+                }
+            }catch(error){
+                console.error(error.message);
+            }
+        }else{
+            try{
+                let = respuestaLog = await $.ajax({
+                    url: "https://apibk.poluxdev.com/v1/secure/login",
+                    type: "POST",
+                    headers:  {
+                        "Authorization": `Bearer ${tkFront}`
+                    },
+                    data: {
+                        user: correo.value,
+                        password: pass.value
+                    }
+                });
+
+                let responseLog = JSON.parse(respuestaLog);
+                
+                if(responseLog.status){
+                    try{
+                        let = respuestaDosFactor = await $.ajax({
+                            url: "https://apibk.poluxdev.com/v1/secure/2FA",
+                            type: "POST",
+                            headers:  {
+                                "Authorization": `Bearer ${tkFront}`
+                            },
+                            data: {
+                                email: correo.value
+                            }
+                        });
+        
+                        let respuesta2F = JSON.parse(respuestaDosFactor);
+                        if(respuesta2F.status){
+                            Swal.fire({
+                                title: "Has iniciado sesión correctamente!",
+                                text: "Hemos enviado un código de confirmación a tu correo electrónico. Presiona 'Ok' para ir al siguiente paso.",
+                                icon: "success",
+                                buttons: {
+                                    continuar: {
+                                        text: "Continuar",
+                                        value: true,
+                                        visible: true,
+                                        className: "btn-continuar",
+                                        closeModal: true
+                                    }
+                                }
+                            }).then((val)=>{
+                                if(val){
+                                    sessionStorage.setItem("CoVe", "true");
+                                    sessionStorage.setItem("PS", pass.value);
+                                    sessionStorage.setItem("CE", correo.value);
+                                    window.location.href = "ConfirmarCodigo.html";
+                                }
+                            });
+                        }
+        
+                    }catch(error){
+                        console.error(error);
+                    }
+                    
+                }else{
+                    Swal.fire({
+                        title:"¡No se inicio sesión!",
+                        text: responseLog.message,
+                        icon: "warning"
+                    });
+                }
+            }catch(error){
+                console.error(error.message);
+            }
+        }
+    });
+}
+
 function convertirAMayusculas(input) {
     input.addEventListener('input', function(event) {
-      input.value = event.target.value.toUpperCase();
+        input.value = event.target.value.toUpperCase();
     });
-  }
+}
+
+function soloNumeros(input) {
+    let valor = input.value;
+    valor = valor.replace(/\D/g, '');
+    input.value = valor;
+}
+
+function cerrarSesion(){
+    document.cookie = "session=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+    location.reload();
+}
