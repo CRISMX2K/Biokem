@@ -14,7 +14,6 @@
     <script>
         // Crear elemento div para contener el header
         var headerContainer = document.createElement("div");
-        headerContainer.style.display = "contents";
         // Usa Fetch API para cargar el contenido del header.html
         fetch("header.html")
             .then(response => response.text())
@@ -26,22 +25,34 @@
                 //Header dinamico
                 const headerConSesion = document.getElementById("ConSession");
                 const headerSinSesion = document.getElementById("SinSession");
+                const Cart = document.querySelector(".carritoComprasHeader");
+                const counterItemsCart = document.getElementById("ItemsCount");
 
                 if (headerConSesion || headerSinSesion) {
                     if (document.cookie.split(';').some(cookie => cookie.trim().startsWith("session=Active"))) {
                         headerConSesion.style.display = "block";
+                        Cart.style.display = "block";
                         headerSinSesion.style.display = "none";
+
+                        const NumberItemsHeader = document.getElementById("ItemsCount");
+                        const cartItems = JSON.parse(localStorage.getItem('cart'));
+                        if (cartItems !== null && Array.isArray(cartItems)) {
+                            NumberItemsHeader.innerHTML = cartItems.length;
+                        } else {
+                            NumberItemsHeader.innerHTML = "0";
+                        }
                     } else {
                         headerConSesion.style.display = "none";
+                        Cart.style.display = "none";
+                        counterItemsCart.style.display = "none";
                         headerSinSesion.style.display = "block";
                     }
                 }
+
+                sessionStorage.setItem("loaded", "done");
             });
-
-            //Captcha
     </script>
-
-    <section class="ContenedorCodigo">
+    <section class="ContenedorCodigo fadeInUp">
         <p style="font-weight: 600; font-size: 20px;margin-top: 0;">Ingresa el código enviado a tu correo electrónico</p>
         <input oninput="soloNumeros(this)" type="text" maxlength="4" oninput="" class="inputEstiloGeneral" placeholder="Ingresa tu código" id="CodigoSeguridad">
         <button class="btnVerdeBK" id="ConfirmarCD">Confirmar</button> <br>

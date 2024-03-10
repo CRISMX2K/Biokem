@@ -27,7 +27,7 @@ body {
 
 nav{
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 20% 1fr;
     justify-content: space-between;
     width: 90%;
     padding: 20px 60px;
@@ -42,22 +42,78 @@ nav img{
     display: flex;
     width: 100%;
     align-self: center;
-    justify-content: center;
+    justify-content: end;
 }
 
 .HeaderLinks span{
     font-weight: 500;
     padding: 0 20px;
     cursor: pointer;
-    font-size: 16px;
+    font-size: 15px;
     transition: color 0.3s ease-in-out, font-size 0.3s ease-in-out;
 }
 
 .HeaderLinks span:hover{
-    color: rgb(219, 218, 218);
-    font-size: 17px;
+    color: rgb(199, 199, 199);
 }
 
+.carritoComprasHeader{
+    cursor: pointer;
+}
+
+.carrito{
+    width: 30px;
+}
+
+#ItemsCount:hover{
+ color: white;
+ cursor: pointer;
+}
+
+.contenedorItemsCarrito{
+    background-color: white;
+    border-radius: 25px;
+    border-top-right-radius: 0;
+    padding: 10px 15px;
+    position:absolute;
+    right: 10px;
+    width: 315px;
+    display: none;
+    max-height: 500px;
+    overflow-y: auto;
+}
+.RegistroItemCart{
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    align-items: center;
+    padding: 10px;
+    margin: 10px;
+    height: 50px;
+    flex: 0 0 calc(22%);
+    position: relative;
+    color: black;
+    font-size: 12px !important;
+    border-bottom: 1px solid rgb(180, 180, 180);
+    border-top: 1px solid rgb(180, 180, 180);
+}
+
+.btnPagarCarrito{
+    padding: 12px 25px;
+    color: white;
+    font-weight: 700;
+    border: 0;
+    border-radius: 10px;
+    background-color: #6c975e;
+    cursor: pointer;
+    transition: outline-offset 0.15s ease-in-out;
+    outline: #6c975e solid 2px;
+    outline-offset: -2px;
+}
+
+.btnPagarCarrito:hover {
+    outline-offset: 3px; 
+}
 /*Contacto*/
 .ContactoContenedorPrincipal{
     display: grid;
@@ -580,7 +636,7 @@ nav img{
     background-color: white ;
     margin: 20px auto;
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.7);
-    width: 80%;
+    width: 85%;
     height: 350px;
     display: flex;
     align-items: center;
@@ -605,8 +661,18 @@ nav img{
     height: 50px;
     flex: 0 0 calc(22%); 
     max-width: calc(22%);
+    position: relative;
 }
 
+.imgAgregarCatalogo{
+    position: absolute;
+    right: 8px;
+    width:20px;
+    cursor: pointer;
+}
+
+
+/*EFECTOS*/
 
 .FadeInDerecha {
     opacity: 0;

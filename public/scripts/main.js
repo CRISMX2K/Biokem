@@ -1,5 +1,6 @@
 let tkFront = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.XMZ8SDUJpD8dVJ0QEgsl5EBgF3VZXQ9oArAlMkh9JvE";
 
+//SECCION DE CONTACTO
 if(window.location.pathname.includes("contacto")){
     let btnCorreo = document.getElementById("enviarCorreoContacto");
     btnCorreo.onclick = async function(){
@@ -77,9 +78,8 @@ if(window.location.pathname.includes("contacto")){
     }
 }
 
-
+//SECCION PAGINA INICIO
 if(document.getElementById("BannerInicio")){
-
     //BANNER PRINCIPAL
     // Ejecutamos la función ajax para traer las imágenes de banner activas e insertar los banners
     async function obtenerBanners() {
@@ -317,7 +317,7 @@ if(document.getElementById("BannerInicio")){
     iniciarCarrusel();
 }
 
-
+//SECCION DE CATALOGO
 if(window.location.pathname.includes("catalogo")){
 
     //Creamos y ejecutamos la funcion para insertar las sucursales que haya y asi mostrar los servicios despues
@@ -352,12 +352,12 @@ if(window.location.pathname.includes("catalogo")){
 
 
     SelectSucursales.onchange = function(){
-
         const AnalisisTexto = document.getElementById("Analisis");
         const ChequeosTexto = document.getElementById("Chequeos");
         const PerfilesTexto = document.getElementById("Perfiles");
         const ImagenTexto = document.getElementById("Imagen");
         const ContenedorRegistros = document.querySelector(".ContenedorInformacionServicios");
+        const cartItems = JSON.parse(localStorage.getItem('cart')) || [];
         
         ContenedorRegistros.innerHTML  = "Seleccione un tipo de servicio para visualizar las opciones";
         ContenedorRegistros.style.justifyContent  = "center";
@@ -396,15 +396,30 @@ if(window.location.pathname.includes("catalogo")){
                         ContenedorRegistros.style.alignItems  = "start";
                         ContenedorRegistros.style.justifyContent  = "start";
                         Analisis.forEach(analisis =>{
-                            let TarjetaRegistro = `
+                            let TarjetaRegistro = "";
+                            if(document.cookie.split(';').some(cookie => cookie.trim().startsWith("session=Active"))){
+                                TarjetaRegistro = `
                                 <div class="RegistroAnalisis FadeInDerecha">
                                     <img src="/content/images/Iconos/analisis.png" style="width:35px;">
-                                    <div style="display:flex; flex-direction:column; font-size:12px; padding:0 10px;">
+                                    <div style="display:flex; flex-direction:column; font-size:12px; padding:0 10px; max-width:80%;">
                                         <span style="font-weight:800;">${analisis.studio}</span>
                                         <span>$${analisis.price} MXN</span>
                                     </div>
+                                    <img src="/content/images/Iconos/icono-agregar.png" class="imgAgregarCatalogo" title="Agregar al carrito" onclick="addItemCart('${analisis.id}', '${analisis.studio}', '${analisis.price}','${analisis.priceList}')">
                                 </div>
                             `;
+                            }else{
+                                TarjetaRegistro = `
+                                <div class="RegistroAnalisis FadeInDerecha">
+                                    <img src="/content/images/Iconos/analisis.png" style="width:35px;">
+                                    <div style="display:flex; flex-direction:column; font-size:12px; padding:0 10px; max-width:80%;">
+                                        <span style="font-weight:800;">${analisis.studio}</span>
+                                        <span>$${analisis.price} MXN</span>
+                                    </div>
+                                    <img src="/content/images/Iconos/icono-agregar.png" class="imgAgregarCatalogo" title="Agregar al carrito" onclick="window.location.href='login.html'">
+                                </div>
+                                `;
+                            }
     
                             ContenedorRegistros.innerHTML += TarjetaRegistro;
                         });
@@ -414,7 +429,6 @@ if(window.location.pathname.includes("catalogo")){
                         ContenedorRegistros.style.justifyContent  = "center";
                         ContenedorRegistros.innerHTML  = "No hay analisis en esta sucursal";
                     }
-                    
 
                 }catch(e){
                     console.error(e);
@@ -444,16 +458,30 @@ if(window.location.pathname.includes("catalogo")){
                         ContenedorRegistros.style.alignItems  = "start";
                         ContenedorRegistros.style.justifyContent  = "start";
                         Perfiles.forEach(perfil =>{
-                            let TarjetaRegistro = `
+                            let TarjetaRegistro = "";
+                            if(document.cookie.split(';').some(cookie => cookie.trim().startsWith("session=Active"))){
+                                TarjetaRegistro = `
                                 <div class="RegistroAnalisis FadeInDerecha">
                                     <img src="/content/images/Iconos/analisis.png" style="width:35px;">
                                     <div style="display:flex; flex-direction:column; font-size:12px; padding:0 10px;">
                                         <span style="font-weight:800;">${perfil.profile}</span>
                                         <span>$${perfil.price} MXN</span>
                                     </div>
+                                    <img src="/content/images/Iconos/icono-agregar.png" class="imgAgregarCatalogo" title="Agregar al carrito" onclick="addItemCart('${perfil.id}', '${perfil.profile}', '${perfil.price}','${perfil.priceList}')">
                                 </div>
                             `;
-    
+                            }else{
+                                TarjetaRegistro = `
+                                <div class="RegistroAnalisis FadeInDerecha">
+                                    <img src="/content/images/Iconos/analisis.png" style="width:35px;">
+                                    <div style="display:flex; flex-direction:column; font-size:12px; padding:0 10px;">
+                                        <span style="font-weight:800;">${perfil.profile}</span>
+                                        <span>$${perfil.price} MXN</span>
+                                    </div>
+                                    <img src="/content/images/Iconos/icono-agregar.png" class="imgAgregarCatalogo" title="Agregar al carrito" onclick="window.location.href='login.html'">
+                                </div>
+                            `;
+                            }
                             ContenedorRegistros.innerHTML += TarjetaRegistro;
                         });
 
@@ -471,8 +499,152 @@ if(window.location.pathname.includes("catalogo")){
             }
         }
     }
+
+
+    //CART FUNCTIONS
+    function addItemCart(idItem, Name, Price, Branch){
+    
+        const cartItems = JSON.parse(localStorage.getItem('cart')) || [];
+        const existingItem = cartItems.find(item => item.id === idItem && item.name === Name);
+
+        if (existingItem) {
+            Swal.fire({
+                title: "¡El item ya está en tu carrito!",
+                icon: "warning",
+                buttons: {
+                    continuar: {
+                        text: "Continuar",
+                        value: true,
+                        visible: true,
+                        className: "btn-continuar",
+                        closeModal: true
+                    }
+                }});
+            return;
+        }else{
+            // Si el ítem no existe, lo agregamos al carrito
+            const item = {
+                id: idItem,
+                name: Name,
+                price: Price,
+                Suc: Branch
+            };
+
+            // Agregar el nuevo ítem al carrito
+            cartItems.push(item);
+
+            // Guardar el carrito actualizado en localStorage
+            localStorage.setItem('cart', JSON.stringify(cartItems));
+
+            //Actualizamos el numero en el header
+            const NumberItemsHeader = document.getElementById("ItemsCount");
+            NumberItemsHeader.innerHTML = JSON.parse(localStorage.getItem('cart')).length;
+            LoadCart();
+            
+            Swal.fire({
+                title: "¡Item agregado!",
+                icon: "success",
+                buttons: {
+                    continuar: {
+                        text: "Continuar",
+                        value: true,
+                        visible: true,
+                        className: "btn-continuar",
+                        closeModal: true
+                    }
+                }});
+        }
+    }
 }
 
+function showContenedorCarrito(){
+    const containerCart = document.querySelector(".contenedorItemsCarrito");
+    containerCart.style.display = "block";
+}
+
+function hideContenedorCarrito(){
+    const containerCart = document.querySelector(".contenedorItemsCarrito");
+    containerCart.style.display = "none";
+}
+
+function LoadCart(){
+    const cartItems = JSON.parse(localStorage.getItem('cart')) || [];
+    const boxItems = document.getElementById("itemsBox");
+    if(cartItems.length > 0){
+        boxItems.innerHTML = "";
+        const cartElement = document.getElementById("cartElement");
+        const container = document.getElementById("containItemsCart");
+
+        container.addEventListener("mouseenter", showContenedorCarrito);
+        
+        container.addEventListener("mouseleave", hideContenedorCarrito);
+
+
+        cartElement.addEventListener("mouseenter", showContenedorCarrito);
+        
+        cartElement.addEventListener("mouseleave", hideContenedorCarrito);
+
+        cartItems.forEach(item =>{
+            let TarjetaRegistro = `
+                <div class="RegistroItemCart fadeInDown">
+                    <img src="/content/images/Iconos/analisis.png" style="width:35px;">
+                    <div style="display:flex; flex-direction:column; font-size:12px; padding:0 10px; font-size: 10px;">
+                        <div style="font-weight:800;">${item.name}</div>
+                        <div>$${item.price} MXN</div>
+                    </div>
+                    <img src="/content/images/Iconos/icono-delete.png" class="imgAgregarCatalogo" title="Eliminar" onclick="deleteItemCart('${item.id}', '${item.name}', '${item.price}','${item.Suc}')">
+                </div>
+            `;
+
+            boxItems.innerHTML += TarjetaRegistro;
+        });
+
+        const NumberItemsHeader = document.getElementById("ItemsCount");
+        NumberItemsHeader.innerHTML = JSON.parse(localStorage.getItem('cart')).length;
+    }else{
+        const cartElement = document.getElementById("cartElement");
+        const container = document.getElementById("containItemsCart");
+
+        container.removeEventListener("mouseenter", showContenedorCarrito);
+        
+        container.removeEventListener("mouseleave", hideContenedorCarrito);
+
+
+        cartElement.removeEventListener("mouseenter", showContenedorCarrito);
+        
+        cartElement.removeEventListener("mouseleave", hideContenedorCarrito);
+
+        boxItems.innerHTML = "";
+        const containerCart = document.querySelector(".contenedorItemsCarrito");
+        containerCart.style.display = "none";
+
+        const NumberItemsHeader = document.getElementById("ItemsCount");
+        NumberItemsHeader.innerHTML = "0";
+    }
+}
+
+function deleteItemCart(idItem, Name, Price, Branch) {
+    let cartItems = JSON.parse(localStorage.getItem('cart')) || [];
+
+    // Filtrar el array para eliminar el elemento específico
+    cartItems = cartItems.filter(item =>
+        !(item.id === idItem && item.name === Name && item.price === Price && item.Suc === Branch)
+    );
+
+    // Guardar el nuevo array en el localStorage
+    localStorage.setItem('cart', JSON.stringify(cartItems));
+    LoadCart();
+}
+
+const intervalLoadCart = setInterval(function(){
+    if(sessionStorage.getItem("loaded") === "done"){
+        clearInterval(intervalLoadCart);
+        setTimeout(LoadCart, 200);
+    }
+});
+
+
+//SECCION DE REGISTRO
 if(window.location.pathname.includes("registro")){
     const FormularioRegistro = document.getElementById("RegistroForm");
 
@@ -563,6 +735,7 @@ if(window.location.pathname.includes("registro")){
     }
 }
 
+//SECCION CONFIRMAR CODIGO
 if(window.location.pathname.includes("ConfirmarCodigo")){
     let codigoEnviado = sessionStorage.getItem("CoVe");
 
@@ -614,7 +787,10 @@ if(window.location.pathname.includes("ConfirmarCodigo")){
                             sessionStorage.removeItem("CoVe");
                             const recordar = document.getElementById("Recordar");
                             if(recordar.checked){
-                                localStorage.setItem("TKLI", response.data.token);
+                                const unaSemanaEnMilisegundos = 7 * 24 * 60 * 60 * 1000;
+                                const fechaExpiracion = new Date(Date.now() + unaSemanaEnMilisegundos);
+                                const fechaExpiracionUTC = fechaExpiracion.toUTCString();
+                                document.cookie = `tkli=${response.data.token}; expires=${fechaExpiracionUTC}; path=/`;
                             }
 
                             try{
@@ -664,6 +840,7 @@ if(window.location.pathname.includes("ConfirmarCodigo")){
     }
 }
 
+//SECCION LOGIN
 if(window.location.pathname.includes("login")){
 
     const formularioLog = document.getElementById("LoginForm");
@@ -672,7 +849,7 @@ if(window.location.pathname.includes("login")){
 
     formularioLog.addEventListener("submit", async function(event){
         event.preventDefault();
-        if(localStorage.getItem("TKLI") !== null && localStorage.getItem("TKLI") !== "" && localStorage.getItem("TKLI") !== undefined){
+        if(document.cookie.indexOf('tkli=') !== -1){
             try{
                 let = respuestaLog = await $.ajax({
                     url: "https://apibk.poluxdev.com/v1/secure/login",
@@ -772,6 +949,8 @@ if(window.location.pathname.includes("login")){
     });
 }
 
+
+//FUNCIONES DE USO GENERAL
 function convertirAMayusculas(input) {
     input.addEventListener('input', function(event) {
         input.value = event.target.value.toUpperCase();
@@ -788,3 +967,4 @@ function cerrarSesion(){
     document.cookie = "session=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
     location.reload();
 }
+

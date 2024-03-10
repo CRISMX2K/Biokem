@@ -26,16 +26,21 @@
                 //Header dinamico
                 const headerConSesion = document.getElementById("ConSession");
                 const headerSinSesion = document.getElementById("SinSession");
+                const Cart = document.querySelector(".carritoComprasHeader");
+                const counterItemsCart = document.getElementById("ItemsCount");
 
                 if (headerConSesion || headerSinSesion) {
                     if (document.cookie.split(';').some(cookie => cookie.trim().startsWith("session=Active"))) {
-                        headerConSesion.style.display = "block";
-                        headerSinSesion.style.display = "none";
+                        window.location.href = "/";
                     } else {
                         headerConSesion.style.display = "none";
+                        Cart.style.display = "none";
+                        counterItemsCart.style.display = "none";
                         headerSinSesion.style.display = "block";
                     }
                 }
+
+                sessionStorage.setItem("loaded", "done");
             });
 
             //Captcha

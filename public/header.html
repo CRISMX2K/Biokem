@@ -7,8 +7,18 @@
             <span>Quienes somos</span>
             <span onclick="window.location.href = 'catalogo.html'">Servicios</span>
             <span onclick="window.location.href = 'contacto.html'">Contactanos</span>
-            <span onclick="window.location.href = 'login.html'" id="SinSession">Inicia sesión / regístrate</span>
+            <span onclick="window.location.href = 'login.html'" id="SinSession">Inicia sesión / Regístrate</span>
             <span onclick="cerrarSesion()" id="ConSession" style="display: none;">Cerrar sesión</span>
+            <img src="/content/images/Iconos/carritoCompras.png" alt="" class="carritoComprasHeader carrito" id="cartElement">
+            <div style="position: relative;" id="containItemsCart">   
+                <span class="carritoComprasHeader" style="font-size: 12px; padding: 0 0 0 5px;" id="ItemsCount">0</span>
+                <div class="contenedorItemsCarrito">
+                    <p style="color: black; font-weight: 700;margin-bottom: 5px;">Tu carrito:</p>
+                    <div id="itemsBox"></div>
+
+                    <button class="btnPagarCarrito fadeInDown">Ir a pagar</button>
+                </div>
+            </div>
         </div>
     </nav>
 </header>
