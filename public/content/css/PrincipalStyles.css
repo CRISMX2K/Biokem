@@ -781,12 +781,14 @@ nav img{
     border-radius: 40px;
     height: fit-content;
     justify-self: center;
-    margin: calc(6% + var(--header-height)) auto 20px auto ;
+    margin: calc(6% + var(--header-height)) auto 20px auto;
 }
 
 .imgLogin{
-    height: 300px;
+    width: 100%;
+    height: 290px;
     transform: scaleX(-1);
+    margin-top: 25px;
     justify-self: start;
 }
 
